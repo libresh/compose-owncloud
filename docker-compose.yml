@@ -9,7 +9,7 @@ web:
   volumes_from:
     - app
   ports:
-    - 80
+    - 443
 app:
   image: indiehosters/owncloud
   links:
