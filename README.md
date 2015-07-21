@@ -17,6 +17,18 @@ And then:
 
 And all the data will be located under the `./data` folder.
 
+## TLS
+
+```
+mkdir cert
+cd cert
+openssl dhparam 2048 -out dhparam.pem
+cp your.key cert/private.key
+cp your.cert cert/domain.crt
+cp root.cert cert/root.crt
+chmod 600 cert/private.key
+```
+
 ## How to Backup this
 
 Just run:

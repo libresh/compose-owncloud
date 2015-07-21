@@ -3,6 +3,7 @@ web:
   volumes:
     - nginx-owncloud.conf:/etc/nginx/conf.d/nginx-owncloud.conf:ro
     - nginx.conf:/etc/nginx/nginx.conf:ro
+    - cert:/cert
   links:
     - app
   volumes_from:
