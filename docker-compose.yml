@@ -14,6 +14,7 @@ app:
   image: indiehosters/owncloud
   links:
     - db:mysql
+    - redis
   volumes:
     - data/apps:/var/www/html/apps
     - data/config:/var/www/html/config
@@ -27,4 +28,6 @@ db:
     - data/mysql/dump:/dump
   environment:
     MYSQL_ROOT_PASSWORD
+redis:
+  image: redis
 
