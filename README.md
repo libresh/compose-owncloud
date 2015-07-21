@@ -29,6 +29,22 @@ cp root.cert cert/root.crt
 chmod 600 cert/private.key
 ```
 
+## Memcached
+
+Add this to your conf file:
+
+```
+  'memcache.local' => '\OC\Memcache\Memcached',
+  'memcached_servers' => array(
+        array('memcached', 11211),
+),
+```
+
+And make sure to rebuild locally the image to have memcached support in php:
+```
+docker build -t indiehosters/owncloud
+```
+
 ## How to Backup this
 
 Just run:

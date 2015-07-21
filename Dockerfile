@@ -11,13 +11,18 @@ RUN apt-get update \
       sudo \
       libpng12-dev \
       libjpeg-dev \
+      libmemcached-dev \
 &&  rm -rf /var/lib/apt/lists/* \
+&&  curl -L http://pecl.php.net/get/memcached-2.2.0.tgz >> /usr/src/php/ext/memcached.tgz \
+&&  tar -xf /usr/src/php/ext/memcached.tgz -C /usr/src/php/ext/ \
+&&  rm /usr/src/php/ext/memcached.tgz \
 &&  docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 &&  docker-php-ext-install \
       gd \
       zip \
       mysql \
-      pdo_mysql
+      pdo_mysql \
+      memcached-2.2.0
 
 VOLUME /var/www/html
 
