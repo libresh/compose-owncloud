@@ -1,38 +1,40 @@
 FROM php:5.6-fpm
 
-# import owncloud public key
-RUN curl -o owncloud.asc -SL https://owncloud.org/owncloud.asc \
-&&  gpg --import owncloud.asc \
-&&  rm owncloud.asc
+RUN apt-get update && apt-get install -y \
+  bzip2 \
+  libcurl4-openssl-dev \
+  libfreetype6-dev \
+  libicu-dev \
+  libjpeg-dev \
+  libmcrypt-dev \
+  libmemcached-dev \
+  libpng12-dev \
+  libpq-dev \
+  libxml2-dev \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update \
-&&  apt-get install -y --no-install-recommends \
-      bzip2 \
-      sudo \
-      libpng12-dev \
-      libjpeg-dev \
-&&  rm -rf /var/lib/apt/lists/* \
-&&  docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-&&  docker-php-ext-install \
-      gd \
-      zip \
-      mysql \
-      pdo_mysql
+#gpg key from https://owncloud.org/owncloud.asc
+RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys E3036906AD9F30807351FAC32D5D5E97F6978A26
 
+# https://doc.owncloud.org/server/8.1/admin_manual/installation/source_installation.html#prerequisites
+RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+ && docker-php-ext-install gd intl mbstring mcrypt mysql pdo_mysql pdo_pgsql pgsql zip
+
+# PECL extensions
+RUN pecl install APCu-beta redis memcached
+
+ENV OWNCLOUD_VERSION 8.1.3
 VOLUME /var/www/html
+
+RUN curl -fsSL -o owncloud.tar.bz2 \
+      "https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2" \
+ && curl -fsSL -o owncloud.tar.bz2.asc \
+      "https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2.asc" \
+ && gpg --verify owncloud.tar.bz2.asc \
+ && tar -xjf owncloud.tar.bz2 -C /usr/src/ \
+ && rm owncloud.tar.bz2 owncloud.tar.bz2.asc
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
-ENV OWNCLOUD_VERSION 8.1.0
-
-# upstream tarballs include ./owncloud/ so this gives us /usr/src/owncloud
-RUN curl -o owncloud.tar.bz2 -fSL https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2 \
-&&  curl -o owncloud.tar.bz2.asc -fSL https://download.owncloud.org/community/owncloud-${OWNCLOUD_VERSION}.tar.bz2.asc \
-&&  gpg --verify owncloud.tar.bz2.asc \
-&&  tar -xjf owncloud.tar.bz2 -C /usr/src/ \
-&&  rm owncloud.tar.bz2* \
-&&  chown -R www-data:www-data /usr/src/owncloud
-
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]
-

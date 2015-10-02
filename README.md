@@ -1,34 +1,50 @@
 # ownCloud
 ownCloud app for IndieHosters network!
 
-## Prerequisite
+# How to use this image
 
-You need to have [docker](https://docs.docker.com/linux/started/) and [docker-compose](http://docs.docker.com/compose/) installed.
+The easiest is to use our `docker-compose.yml`.
 
-## How to run ownCloud
+Make sure you have [docker-compose](http://docs.docker.com/compose/install/) installed. And then:
 
-Modify `docker-compose.yml` `ROOT_URL` and `MYSQL_ROOT_PASSWORD`value to match your environment.
-
-And then:
-
-```bash
-./RUN
+```
+git clone https://github.com/indiehosters/owncloud.git
+cd owcloud
+# edit variables:
+vi .env
+docker-compose up
 ```
 
-And all the data will be located under the `./data` folder.
+You can now access your instance on the port 80 of the IP of your machine.
 
-## How to Backup this
+## Accees it from Internet
 
-Just run:
+We recommend the usage of TLS, so the easiest is to use the `nginx-tls.conf` file.
 
-```bash
-./BACKUP
+```
+mkdir cert
+cd cert
+openssl dhparam 2048 -out dhparam.pem
+cp your.key cert/private.key
+cp your.cert cert/domain.crt
+cp root.cert cert/root.crt
+chmod 600 cert/private.key
 ```
 
-This will create a dump of the mysql database. Then just copy the data folder to a safe location and you should be fine!
+Once it is done, you can connect to the port of the host by adding this line to `docker-compose.yml`:
+```
+web:
+...
+  - ports:
+    - "443:443"
+    - "80:80"
+...
+```
 
-## Question?
+## Installation
 
-If you have any questions, don't hesitate to open issues.
+Once started, you'll arrive at the configuration wizzard.
 
+## Backup
 
+In order to backup, just run the `./BACKUP` script. And copy all the data to a safe place.
