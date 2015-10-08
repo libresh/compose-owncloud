@@ -12,7 +12,6 @@ app:
   image: indiehosters/owncloud
   links:
     - db
-    - memcached
   volumes:
     - ./data/apps:/var/www/html/apps
     - ./data/config:/var/www/html/config
@@ -23,5 +22,3 @@ db:
     - ./mysql/runtime:/var/lib/mysql
   env_file:
     - ./.env
-memcached:
-  image: memcached
