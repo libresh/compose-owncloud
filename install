@@ -1,5 +1,7 @@
 #!/bin/bash -eux
 
+mkdir -p ./data/config
+
 echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" > .env
 
 cat > ./data/config/config.php <<EOF
