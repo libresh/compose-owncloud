@@ -30,5 +30,6 @@ cat > ./data/config/config.php <<EOF
   'mail_smtpauthtype' => 'LOGIN',
   'mail_smtpname' => 'noreply.${url}',
   'mail_smtppassword' => '${email_password}@indie.host',
+  'memcache.local' => '\\OC\\Memcache\\APCu',
 );
 EOF
