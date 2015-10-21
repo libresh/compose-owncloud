@@ -15,6 +15,17 @@ vi .env
 docker-compose up
 ```
 
+Once it is done, you can open your browser and connect to the IP of the container: http://container_ip.
+
+If you want to access it via the IP of the HOST, add this line to `docker-compose.yml`:
+```
+web:
+...
+  - ports:
+    - "80:80"
+...
+```
+
 You can now access your instance on the port 80 of the IP of your machine.
 
 ## Accees it from Internet
