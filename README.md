@@ -21,7 +21,7 @@ If you want to access it via the IP of the HOST, add this line to `docker-compos
 ```
 web:
 ...
-  - ports:
+  ports:
     - "80:80"
 ...
 ```
@@ -46,7 +46,7 @@ Once it is done, you can connect to the port of the host by adding this line to 
 ```
 web:
 ...
-  - ports:
+  ports:
     - "443:443"
     - "80:80"
 ...
