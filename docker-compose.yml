@@ -7,7 +7,7 @@ web:
   volumes_from:
     - app
 app:
-  image: owncloud:fpm
+  image: owncloud:8.1.4-fpm
   links:
     - db
   volumes:
