@@ -6,6 +6,8 @@ MYSQL_ROOT_PASSWORD=`tr -dc A-Za-z0-9_ < /dev/urandom | head -c 20 | xargs`
 
 echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" > .env
 
+source config
+
 cat > ./data/config/config.php <<EOF
 <?php
 \$CONFIG = array (
