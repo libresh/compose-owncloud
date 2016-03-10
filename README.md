@@ -12,6 +12,8 @@ git clone https://github.com/indiehosters/owncloud.git
 cd owcloud
 # edit variables:
 vi .env
+# edit url, mail variables
+vi config
 docker-compose up
 ```
 
