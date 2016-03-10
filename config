@@ -1,0 +1,7 @@
+#!/bin/bash -eux
+
+export URL=""
+export MAIL_DOMAIN=""
+export MAIL_HOST=""
+export MAIL_PORT=""
+export MAIL_PASS=""
