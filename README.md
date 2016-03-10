@@ -15,6 +15,17 @@ vi .env
 docker-compose up
 ```
 
+This step is needed only if you are not using [LibrePaas](https://github.com/indiehosters/LibrePaaS)
+Set mail and url variables
+```
+export URL="YOUR_URL"
+export MAIL_DOMAIN="YOUR_MAIL_DOMAIN"
+export MAIL_HOST="YOU_MAIL_HOST"
+export MAIL_PORT="MAIL_PORT"
+export MAIL_PASS="MAIL_PASS"
+```
+
+
 Once it is done, you can open your browser and connect to the IP of the container: http://container_ip.
 
 If you want to access it via the IP of the HOST, add this line to `docker-compose.yml`:
