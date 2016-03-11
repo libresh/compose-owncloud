@@ -5,26 +5,18 @@ ownCloud app for IndieHosters network!
 
 The easiest is to use our `docker-compose.yml`.
 
-Make sure you have [docker-compose](http://docs.docker.com/compose/install/) installed. And then:
+Make sure you have [docker-compose](http://docs.docker.com/compose/install/) installed. And then if you are not using [LibrePaas](https://github.com/indiehosters/LibrePaaS), set mail and url variables:
 
-```
-git clone https://github.com/indiehosters/owncloud.git
-cd owcloud
-# edit variables:
-vi .env
-docker-compose up
-```
-
-This step is needed only if you are not using [LibrePaas](https://github.com/indiehosters/LibrePaaS)
-Set mail and url variables
 ```
 export URL="YOUR_URL"
 export MAIL_DOMAIN="YOUR_MAIL_DOMAIN"
 export MAIL_HOST="YOU_MAIL_HOST"
 export MAIL_PORT="MAIL_PORT"
 export MAIL_PASS="MAIL_PASS"
+git clone https://github.com/indiehosters/owncloud.git
+cd owcloud
+docker-compose up
 ```
-
 
 Once it is done, you can open your browser and connect to the IP of the container: http://container_ip.
 
