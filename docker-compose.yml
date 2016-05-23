@@ -21,4 +21,4 @@ db:
   volumes:
     - ./mysql/runtime:/var/lib/mysql
   env_file:
-    - ./.env
+    - ./env
