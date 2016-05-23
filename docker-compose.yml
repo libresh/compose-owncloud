@@ -6,6 +6,8 @@ web:
     - app
   volumes_from:
     - app
+  environment:
+    - HOST
 app:
   image: owncloud:fpm
   links:
