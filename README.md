@@ -14,7 +14,7 @@ export MAIL_HOST="YOU_MAIL_HOST"
 export MAIL_PORT="MAIL_PORT"
 export MAIL_PASS="MAIL_PASS"
 git clone https://github.com/indiehosters/owncloud.git
-cd owcloud
+cd owncloud
 docker-compose up
 ```
 
